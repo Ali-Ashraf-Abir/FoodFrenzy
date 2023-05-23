@@ -26,12 +26,17 @@ const PopularMenus = () => {
             <div className="lg:text-5xl  text-3xl text-center text-black font-bold border-b-2 border-white-200 w-[30%] mx-auto font-nunito">Popular Items</div>
             <div className="grid md:grid-cols-2 gap-5 mt-[50px]">
                 {
-                    menu.map(item=><MenuItemCard
+                    menu.slice(0,6).map(item=><MenuItemCard
                     
                     key={item._id}
                     item={item}
                     ></MenuItemCard>)
                 }
+            </div>
+            <div className="">
+            {
+            menu.length>6 && <div className="text-center"><Link><button className='btn btn-warning'>See More</button></Link></div>
+            }
             </div>
         </div>
     );
