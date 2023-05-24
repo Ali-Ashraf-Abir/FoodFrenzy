@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useMenu from '../../../Hooks/UseMenu/UseMenu';
 import MenuItemCard from '../../MenuItemCard/MenuItemCard';
 
 const PopularMenus = () => {
-    const [menu,setMenu]=useState([])
+    // const [menu,setMenu]=useState([])
 
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        fetch('/menu.json')
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-            const popularItems=data.filter(item=>item.category=='popular')
-            setMenu(popularItems)
-            console.log(popularItems)
-        })
-    },[])
+    //     fetch('/menu.json')
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         console.log(data)
+    //         const popularItems=data.filter(item=>item.category=='popular')
+    //         setMenu(popularItems)
+    //         console.log(popularItems)
+    //     })
+    // },[])
 
+
+    const [menu]=useMenu()
+    const popularItems=menu.filter(item=>item.category==='popular')
 
 
 
@@ -26,7 +31,7 @@ const PopularMenus = () => {
             <div className="lg:text-5xl  text-3xl text-center text-black font-bold border-b-2 border-white-200 w-[30%] mx-auto font-nunito">Popular Items</div>
             <div className="grid md:grid-cols-2 gap-5 mt-[50px]">
                 {
-                    menu.slice(0,6).map(item=><MenuItemCard
+                    popularItems.slice(0,6).map(item=><MenuItemCard
                     
                     key={item._id}
                     item={item}
